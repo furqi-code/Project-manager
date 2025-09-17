@@ -16,6 +16,7 @@ export function Input({ showForm, setShowform, addProject }) {
     const created_at = created_atRef.current.value;
     const dueDate = dueDateRef.current.value;
     addProject({ title, description, status, created_at, dueDate, updated_at });
+    // Clear the form and hide it
     titleRef.current.value = "" ;
     descriptionRef.current.value = "" ;
     statusRef.current.value = "pending" ;

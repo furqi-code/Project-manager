@@ -38,15 +38,54 @@ export function App() {
       const regex = new RegExp(searchText, "i");
       return regex.test(project.title);
     });
-    filteredArray.sort((a, b) => a.title.localeCompare(b.title));
-    return filteredArray.map((project) => (
-      <Card
-        key={project.id}
-        {...project}
-        deleteProject={removeProject}
-        updateProject={editProject}
-      ></Card>
-    ));
+    if (filteredArray.length !== 0) {
+      filteredArray.sort((a, b) => a.title.localeCompare(b.title));
+      return filteredArray.map((project) => (
+        <Card
+          key={project.id}
+          {...project}
+          deleteProject={removeProject}
+          updateProject={editProject}
+        ></Card>
+      ));
+    } else {
+      return (
+        <>
+          <p className="text-center p-2">
+            Project not found!!!! <br /> click to add ?
+          </p>
+          <button
+            className={"btn btn-outline-success"}
+            onClick={() => {
+                setShowform(true);
+                setSearchText("");
+            }}
+          >
+            Add card
+          </button>
+          {/* <button
+            className={"btn btn-outline-success"}
+            onClick={() => {
+              setProjectList([
+                ...projectList,
+                {
+                  id: projectList.length + 1,
+                  title: searchText,
+                  description: "default static description",
+                  status: "just now",
+                  created_at: new Date().toLocaleDateString("ar-EG"),
+                  dueDate: new Date().toLocaleDateString("ar-EG"),
+                  updated_at: "",
+                },
+              ]);
+              setSearchText("");
+            }}
+          >
+            Add card
+          </button> */}
+        </>
+      );
+    }
   };
 
   return (

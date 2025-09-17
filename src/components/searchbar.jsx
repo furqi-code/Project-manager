@@ -1,4 +1,4 @@
-export function Searchbar({SearchText, setSearchText}) {
+export function Searchbar({searchText, setSearchText}) {
   return (
     <>
       <form className="d-flex" role="search">
@@ -7,7 +7,7 @@ export function Searchbar({SearchText, setSearchText}) {
           type="search"
           placeholder="Search"
           aria-label="Search"
-          value={SearchText}
+          value={searchText}
           onChange={(event) => {
             setSearchText(event.target.value);
           }}
