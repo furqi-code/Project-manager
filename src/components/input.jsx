@@ -9,12 +9,26 @@ export function Input({ showForm, setShowform, addProject }) {
   const updated_at = "" ;
   const today = new Date().toISOString().split("T")[0];
 
+  const insertProject = () => {
+    const title = titleRef.current.value;
+    const description = descriptionRef.current.value;
+    const status = statusRef.current.value;
+    const created_at = created_atRef.current.value;
+    const dueDate = dueDateRef.current.value;
+    addProject({ title, description, status, created_at, dueDate, updated_at });
+    titleRef.current.value = "" ;
+    descriptionRef.current.value = "" ;
+    statusRef.current.value = "pending" ;
+    dueDateRef.current.value = "" ;
+    setShowform(false);
+  }
+
   return (
     <>
       {showForm && (
         <form>
           <div class="space-y-12">
-            <div class="border-b border-gray-900/10 pb-12">
+            <div class="border-b border-gray-900/10 pb-4">
               <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-4">
                   <label
@@ -97,21 +111,10 @@ export function Input({ showForm, setShowform, addProject }) {
           </div>
 
           <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" class="text-sm/6 font-semibold text-gray-900">
-              Cancel
-            </button>
             <button
               type="button"
               class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => {
-                const title = titleRef.current.value;
-                const description = descriptionRef.current.value;
-                const status = statusRef.current.value;
-                const created_at = created_atRef.current.value;
-                const dueDate = dueDateRef.current.value;
-                addProject({ title, description, status, created_at, dueDate, updated_at });
-                setShowform(false);
-              }}
+              onClick={() => insertProject()}
             >
               Save
             </button>

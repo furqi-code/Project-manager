@@ -3,7 +3,7 @@ export function Sidebar({setShowform}) {
     <>
       <div
         class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
-        style={{ width: "280px"}}
+        style={{ width: "280px", height: "100vh"}}
       >
         <a
           href="/"
@@ -30,7 +30,7 @@ export function Sidebar({setShowform}) {
               Create new
             </button>
           </li>
-          <li>
+          {/* <li>
             <button class="btn">
               <svg
                 class="bi pe-none me-2"
@@ -139,7 +139,7 @@ export function Sidebar({setShowform}) {
               ></svg>
               Bho cd k
             </button>
-          </li>
+          </li> */}
         </ul>
         <hr />
       </div>
