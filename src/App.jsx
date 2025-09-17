@@ -12,6 +12,14 @@ export function App() {
     setProjectList(projectList.filter((project) => project.id !== id));
   };
 
+  const editProject = (updatedProject) => {
+    setProjectList(
+      projectList.map((project) =>
+        project.id !== updatedProject.id ? project : updatedProject
+      )
+    );
+  };
+
   const addProject = (project) => {
     setProjectList([
       ...projectList,
@@ -33,7 +41,11 @@ export function App() {
           ></Input>
           {!showForm
             ? projectList.map((project) => (
-                <Card {...project} deleteProject={removeProject}></Card>
+                <Card
+                  {...project}
+                  deleteProject={removeProject}
+                  updateProject={editProject}
+                ></Card>
               ))
             : ""}
         </div>

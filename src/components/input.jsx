@@ -6,6 +6,7 @@ export function Input({ showForm, setShowform, addProject }) {
   const statusRef = useRef();
   const created_atRef = useRef();
   const dueDateRef = useRef();
+  const updated_at = "" ;
   const today = new Date().toISOString().split("T")[0];
 
   return (
@@ -108,7 +109,7 @@ export function Input({ showForm, setShowform, addProject }) {
                 const status = statusRef.current.value;
                 const created_at = created_atRef.current.value;
                 const dueDate = dueDateRef.current.value;
-                addProject({ title, description, status, created_at, dueDate });
+                addProject({ title, description, status, created_at, dueDate, updated_at });
                 setShowform(false);
               }}
             >

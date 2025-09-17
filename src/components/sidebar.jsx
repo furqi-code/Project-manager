@@ -3,7 +3,7 @@ export function Sidebar({setShowform}) {
     <>
       <div
         class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
-        style={{ width: "280px" }}
+        style={{ width: "280px"}}
       >
         <a
           href="/"
@@ -31,7 +31,7 @@ export function Sidebar({setShowform}) {
             </button>
           </li>
           <li>
-            <button class="btn text-white">
+            <button class="btn">
               <svg
                 class="bi pe-none me-2"
                 width="16"
@@ -42,7 +42,7 @@ export function Sidebar({setShowform}) {
             </button>
           </li>
           <li>
-            <button class="btn text-white">
+            <button class="btn">
               <svg
                 class="bi pe-none me-2"
                 width="16"
@@ -53,7 +53,7 @@ export function Sidebar({setShowform}) {
             </button>
           </li>
           <li>
-            <button class="btn text-white">
+            <button class="btn">
               <svg
                 class="bi pe-none me-2"
                 width="16"
@@ -64,14 +64,80 @@ export function Sidebar({setShowform}) {
             </button>
           </li>
           <li>
-            <button class="btn text-white">
+            <button class="btn">
               <svg
                 class="bi pe-none me-2"
                 width="16"
                 height="16"
                 aria-hidden="true"
               ></svg>
-              Customers
+              Clients
+            </button>
+          </li>
+          <li>
+            <button class="btn">
+              <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              ></svg>
+              Gandu
+            </button>
+          </li>
+          <li>
+            <button class="btn">
+              <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              ></svg>
+              Gandu
+            </button>
+          </li>
+          <li>
+            <button class="btn">
+              <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              ></svg>
+              Gandu
+            </button>
+          </li>
+          <li>
+            <button class="btn">
+              <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              ></svg>
+              Gandu
+            </button>
+          </li>
+          <li>
+            <button class="btn">
+              <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              ></svg>
+              Gandu
+            </button>
+          </li>
+          <li>
+            <button class="btn">
+              <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              ></svg>
+              Bho cd k
             </button>
           </li>
         </ul>
