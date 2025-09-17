@@ -1,4 +1,4 @@
-export function Sidebar({}) {
+export function Sidebar({setShowform}) {
   return (
     <>
       <div
@@ -20,18 +20,18 @@ export function Sidebar({}) {
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
+            <button class="btn text-white" onClick={() => setShowform(true)}>
               <svg
                 class="bi pe-none me-2"
                 width="16"
                 height="16"
                 aria-hidden="true"
               ></svg>
-              Home
-            </a>
+              Create new
+            </button>
           </li>
           <li>
-            <a href="#" class="nav-link text-white">
+            <button class="btn text-white">
               <svg
                 class="bi pe-none me-2"
                 width="16"
@@ -39,10 +39,10 @@ export function Sidebar({}) {
                 aria-hidden="true"
               ></svg>
               Dashboard
-            </a>
+            </button>
           </li>
           <li>
-            <a href="#" class="nav-link text-white">
+            <button class="btn text-white">
               <svg
                 class="bi pe-none me-2"
                 width="16"
@@ -50,10 +50,10 @@ export function Sidebar({}) {
                 aria-hidden="true"
               ></svg>
               Orders
-            </a>
+            </button>
           </li>
           <li>
-            <a href="#" class="nav-link text-white">
+            <button class="btn text-white">
               <svg
                 class="bi pe-none me-2"
                 width="16"
@@ -61,10 +61,10 @@ export function Sidebar({}) {
                 aria-hidden="true"
               ></svg>
               Products
-            </a>
+            </button>
           </li>
           <li>
-            <a href="#" class="nav-link text-white">
+            <button class="btn text-white">
               <svg
                 class="bi pe-none me-2"
                 width="16"
@@ -72,7 +72,7 @@ export function Sidebar({}) {
                 aria-hidden="true"
               ></svg>
               Customers
-            </a>
+            </button>
           </li>
         </ul>
         <hr />
