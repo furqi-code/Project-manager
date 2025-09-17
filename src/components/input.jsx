@@ -1,11 +1,12 @@
 import { useRef } from "react";
 
-export function Input({ showForm, setShowform, addProjects }) {
+export function Input({ showForm, setShowform, addProject }) {
   const titleRef = useRef();
   const descriptionRef = useRef();
-  const statusRef = useRef("Pending");
-  const created_atRef = useRef(new Date().toLocaleDateString());
-  const dueDateRef = useRef(new Date().toISOString().split("T")[0]);
+  const statusRef = useRef();
+  const created_atRef = useRef();
+  const dueDateRef = useRef();
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <>
@@ -63,11 +64,7 @@ export function Input({ showForm, setShowform, addProjects }) {
             <label for="status" className="form-label">
               Status
             </label>
-            <select
-              id="status"
-              className="form-select"
-              ref={statusRef}
-            >
+            <select id="status" className="form-select" ref={statusRef}>
               <option value="pending">Pending</option>
               <option value="in-progress">In Progress</option>
               <option value="completed">Completed</option>
@@ -77,13 +74,25 @@ export function Input({ showForm, setShowform, addProjects }) {
             <label for="dueDate" className="form-label">
               Due Date
             </label>
-            <input type="date" id="dueDate" className="form-control" ref={dueDateRef} />
+            <input
+              type="date"
+              id="dueDate"
+              className="form-control"
+            //   defaultValue={today}
+              ref={dueDateRef}
+            />
           </div>
           <div className="p-2">
             <label for="date" className="form-label">
               Created_at
             </label>
-            <input type="date" id="date" className="form-control" ref={created_atRef} />
+            <input
+              type="date"
+              id="date"
+              className="form-control"
+              defaultValue={today}
+              ref={created_atRef}
+            />
           </div>
 
           <div class="mt-6 flex items-center justify-end gap-x-6">
@@ -99,8 +108,8 @@ export function Input({ showForm, setShowform, addProjects }) {
                 const status = statusRef.current.value;
                 const created_at = created_atRef.current.value;
                 const dueDate = dueDateRef.current.value;
-                addProjects({title, description, status, created_at, dueDate});
-                setShowform(false) ;
+                addProject({ title, description, status, created_at, dueDate });
+                setShowform(false);
               }}
             >
               Save

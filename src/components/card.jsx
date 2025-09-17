@@ -1,4 +1,4 @@
-export function Card({ title, description, status, dueDate, created_at }) {
+export function Card({ id, title, description, status, dueDate, created_at, deleteProject }) {
   return (
     <>
       <div class="todo-card my-4">
@@ -23,7 +23,7 @@ export function Card({ title, description, status, dueDate, created_at }) {
           <button type="button" className="canvaBtn btn-edit">
             Edit
           </button>
-          <button type="button" className="canvaBtn btn-delete">
+          <button type="button" className="canvaBtn btn-delete" onClick={() => deleteProject(id)}>
             Delete
           </button>
         </div>
