@@ -15,6 +15,10 @@ export function Input({ showForm, setShowform, addProject }) {
     const status = statusRef.current.value;
     const created_at = created_atRef.current.value;
     const dueDate = dueDateRef.current.value;
+    if(!title || !description || !dueDate){
+      alert("try to Fill up all the input fields");
+      return ;
+    }
     addProject({ title, description, status, created_at, dueDate, updated_at });
     // Clear the form and hide it
     titleRef.current.value = "" ;
@@ -33,7 +37,7 @@ export function Input({ showForm, setShowform, addProject }) {
               <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-4">
                   <label
-                    for="username"
+                    for="title"
                     class="block text-sm/6 font-medium text-gray-900"
                   >
                     Title
@@ -41,9 +45,9 @@ export function Input({ showForm, setShowform, addProject }) {
                   <div class="mt-2">
                     <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
                       <input
-                        id="username"
+                        id="title"
                         type="text"
-                        name="username"
+                        name="title"
                         placeholder="janesmith"
                         class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                         ref={titleRef}

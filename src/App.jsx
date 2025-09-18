@@ -63,26 +63,6 @@ export function App() {
           >
             Add card
           </button>
-          {/* <button
-            className={"btn btn-outline-success"}
-            onClick={() => {
-              setProjectList([
-                ...projectList,
-                {
-                  id: projectList.length + 1,
-                  title: searchText,
-                  description: "default static description",
-                  status: "just now",
-                  created_at: new Date().toLocaleDateString("ar-EG"),
-                  dueDate: new Date().toLocaleDateString("ar-EG"),
-                  updated_at: "",
-                },
-              ]);
-              setSearchText("");
-            }}
-          >
-            Add card
-          </button> */}
         </>
       );
     }
