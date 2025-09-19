@@ -35,6 +35,23 @@ export function App() {
     );
   };
 
+  const editTask = (updatedTask) => {
+    setProjectList(
+      projectList.map((project) => {
+        if (project.id !== selectedProject) {
+          return project;
+        }
+        const newTask = project.tasks.map((task) =>
+          task.id === updatedTask.id ? updatedTask : task
+        );
+        return {
+          ...project,
+          tasks: newTask,
+        };
+      })
+    );
+  };
+
   // The projectList array is getting updated, but the task of that particular project
   //  only shows up because the showTaskForm state is being changed
   const addTask = (task) => {
