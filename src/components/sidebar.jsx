@@ -8,6 +8,14 @@ export function Sidebar({ setProjectform, setProjectList, ProjectSearchbar, proj
     setProjectList(projectList.filter((project) => project.id !== id));
   };
 
+  const editProject = (updatedProject) => {
+    setProjectList(
+      projectList.map((project) =>
+        project.id !== updatedProject.id ? project : updatedProject
+      )
+    );
+  };
+
   const renderProjects = () => {
     if (projectList.length === 0)
       return <h5 className="text-center p-2">Zero Project added</h5>;
@@ -24,6 +32,7 @@ export function Sidebar({ setProjectform, setProjectList, ProjectSearchbar, proj
             key={project.id}
             {...project}
             deleteProject={removeProject}
+            updateProject={editProject}
           ></ProjectCard>
         </li>
       ));

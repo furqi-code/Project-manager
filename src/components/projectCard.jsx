@@ -1,6 +1,14 @@
 import { useState, useRef } from "react";
 
-export function ProjectCard({ id, title, description, status, deleteProject }) {
+export function ProjectCard({
+  id,
+  title,
+  description,
+  status,
+  tasks,
+  deleteProject,
+  updateProject,
+}) {
   const [isEditing, setisEditing] = useState(false);
   const titleRef = useRef();
   const descriptionRef = useRef();
@@ -59,7 +67,11 @@ export function ProjectCard({ id, title, description, status, deleteProject }) {
             </button>
           )}
           {!isEditing && (
-            <button type="button" className="btn btn-outline-danger" onClick={() => deleteProject(id)}>
+            <button
+              type="button"
+              className="btn btn-outline-danger"
+              onClick={() => deleteProject(id)}
+            >
               Delete
             </button>
           )}
@@ -73,7 +85,22 @@ export function ProjectCard({ id, title, description, status, deleteProject }) {
             </button>
           )}
           {isEditing && (
-            <button type="button" className="btn btn-outline-success">
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => {
+                const title = titleRef.current.value;
+                const description = descriptionRef.current.value;
+                updateProject({
+                  id,
+                  title,
+                  description,
+                  status: "just now",
+                  tasks
+                });
+                setisEditing(false);
+              }}
+            >
               Save
             </button>
           )}
