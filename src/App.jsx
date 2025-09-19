@@ -2,11 +2,16 @@ import { useState } from "react";
 import { ProjectSearchbar } from "./components/project_searchbar";
 import { TaskSearchbar } from "./components/task_searchbar";
 import { ProjectInput } from "./components/project_input";
+import { TaskInput } from "./components/task_input";
+import { TaskCard } from "./components/taskCard";
 import { Sidebar } from "./components/sidebar";
 
 export function App() {
   const [showProjectForm, setProjectform] = useState(false);
+  const [showTaskForm, setTaskform] = useState(false);
   const [projectList, setProjectList] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [searchTextTask, setSearchTextTask] = useState("");
   console.log("ProjectList: \n", projectList);
 
   const addProject = (project) => {
@@ -16,6 +21,51 @@ export function App() {
     ]);
   };
 
+  const addTask = (project) => {
+    const clickedProject = projectList.filter((project) => project.id === selectedProject);
+    clickedProject[0].tasks.push({...project, id: clickedProject[0].tasks.length + 1});
+    console.log("adding task of selectedProject: \n", clickedProject);
+  };
+
+  const renderTasks = () => {
+    const clickedProject = projectList.filter((project) => project.id === selectedProject);
+     if (clickedProject.length === 0) // first check kro ki project pe click hua ki nhi ? and does it exist ?
+      return <h5 className="text-center p-2">click on any project to see their tasks</h5>;
+    if (clickedProject[0].tasks.length === 0)
+      return <h5 className="text-center p-2">Zero task added to this project</h5>;
+    const filteredArray = clickedProject[0].tasks.filter((task) => {
+      if (searchTextTask === "") return true;
+      const regex = new RegExp(searchTextTask, "i");
+      return regex.test(task.title);
+    });
+    if (filteredArray.length !== 0) {
+      filteredArray.sort((a, b) => a.title.localeCompare(b.title));
+      return filteredArray.map((task) => (
+        <TaskCard
+          key={task.id}
+          {...task}
+        ></TaskCard>
+      ));
+    } else {
+      return (
+        <>
+          <p className="text-center p-2">
+            Task not found!!!! <br /> click to add ?
+          </p>
+          <button
+            className={"btn btn-outline-success"}
+            onClick={() => {
+              setTaskform(true);
+              setSearchTextTask("");
+            }}
+          >
+            Add card
+          </button>
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <div className="row">
@@ -23,12 +73,15 @@ export function App() {
           <Sidebar
             setProjectform={setProjectform}
             setProjectList={setProjectList}
+            setTaskform={setTaskform}
+            setSelectedProject={setSelectedProject}
             ProjectSearchbar={ProjectSearchbar}
             projectList={projectList}
           ></Sidebar>
         </div>
         <div className="col-lg-3 me-5 mt-4">
           <TaskSearchbar></TaskSearchbar>
+          {renderTasks()}
         </div>
         <div className="col-lg-4 ms-5">
           <ProjectInput
@@ -36,6 +89,11 @@ export function App() {
             setProjectform={setProjectform}
             addProject={addProject}
           ></ProjectInput>
+          <TaskInput
+            showTaskForm={showTaskForm}
+            setTaskform={setTaskform}
+            addTask={addTask}
+          ></TaskInput>
         </div>
       </div>
     </>

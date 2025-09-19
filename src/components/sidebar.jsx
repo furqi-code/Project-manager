@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { ProjectCard } from "./projectCard";
 
-export function Sidebar({ setProjectform, setProjectList, ProjectSearchbar, projectList }) {
+export function Sidebar({
+  setProjectform,
+  setProjectList,
+  ProjectSearchbar,
+  projectList,
+  setTaskform,
+  setSelectedProject,
+}) {
   const [searchTextProject, setSearchTextProject] = useState("");
 
   const removeProject = (id) => {
@@ -27,7 +34,12 @@ export function Sidebar({ setProjectform, setProjectList, ProjectSearchbar, proj
     if (filteredArray.length !== 0) {
       filteredArray.sort((a, b) => a.title.localeCompare(b.title));
       return filteredArray.map((project) => (
-        <li>
+        <li
+          onClick={() => {
+            setSelectedProject(project.id);
+            setTaskform(true);
+          }}
+        >
           <ProjectCard
             key={project.id}
             {...project}

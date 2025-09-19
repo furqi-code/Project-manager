@@ -1,4 +1,4 @@
-export function TaskSearchbar({searchTextTask, setSearchTextTask}) {
+export function TaskSearchbar() {
   return (
     <>
       <form className="d-flex" role="search">
@@ -7,10 +7,7 @@ export function TaskSearchbar({searchTextTask, setSearchTextTask}) {
           type="search"
           placeholder="Search"
           aria-label="Search"
-          value={searchTextTask}
-          onChange={(event) => {
-            setSearchTextTask(event.target.value);
-          }}
+          
         />
         {/* <button type="button" className="btn btn-outline-success">
           Search
