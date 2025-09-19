@@ -1,15 +1,15 @@
-export function Searchbar({searchText, setSearchText}) {
+export function ProjectSearchbar({searchTextProject, setSearchTextProject}) {
   return (
     <>
-      <form className="d-flex" role="search">
+      <form className="d-flex" role="search" style={{width: "55%"}}>
         <input
           className="form-control me-2"
           type="search"
           placeholder="Search"
           aria-label="Search"
-          value={searchText}
+          value={searchTextProject}
           onChange={(event) => {
-            setSearchText(event.target.value);
+            setSearchTextProject(event.target.value);
           }}
         />
         {/* <button type="button" className="btn btn-outline-success">

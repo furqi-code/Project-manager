@@ -1,9 +1,49 @@
-export function Sidebar({setShowform}) {
+import { useState } from "react";
+import { ProjectCard } from "./projectCard";
+
+export function Sidebar({ setProjectform, ProjectSearchbar, projectList }) {
+  const [searchTextProject, setSearchTextProject] = useState("");
+
+  const renderProjects = () => {
+    if (projectList.length === 0)
+      return <h5 className="text-center p-2">Zero Project added</h5>;
+    const filteredArray = projectList.filter((project) => {
+      if (searchTextProject === "") return true;
+      const regex = new RegExp(searchTextProject, "i");
+      return regex.test(project.title);
+    });
+    if (filteredArray.length !== 0) {
+      filteredArray.sort((a, b) => a.title.localeCompare(b.title));
+      return filteredArray.map((project) => (
+        <li>
+          <ProjectCard key={project.id} {...project}></ProjectCard>
+        </li>
+      ));
+    } else {
+      return (
+        <>
+          <p className="text-center p-2">
+            Project not found!!!! <br /> click to add ?
+          </p>
+          <button
+            className={"btn btn-outline-success"}
+            onClick={() => {
+              setProjectform(true);
+              setSearchTextProject("");
+            }}
+          >
+            Add Project
+          </button>
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <div
-        class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
-        style={{ width: "280px", height: "100vh"}}
+        class="d-flex align-items-center flex-column flex-shrink-0 p-3 text-bg-dark"
+        style={{ width: "450px", height: "100vh" }}
       >
         <a
           href="/"
@@ -15,12 +55,16 @@ export function Sidebar({setShowform}) {
             height="32"
             aria-hidden="true"
           ></svg>
-          <span class="fs-4">Sidebar</span>
+          <span class="fs-4">Projects</span>
         </a>
         <hr />
+        <ProjectSearchbar
+          searchTextProject={searchTextProject}
+          setSearchTextProject={setSearchTextProject}
+        ></ProjectSearchbar>
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <button class="btn text-white" onClick={() => setShowform(true)}>
+            <button class="btn text-white" onClick={() => setProjectform(true)}>
               <svg
                 class="bi pe-none me-2"
                 width="16"
@@ -30,116 +74,7 @@ export function Sidebar({setShowform}) {
               Create new
             </button>
           </li>
-          {/* <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Dashboard
-            </button>
-          </li>
-          <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Orders
-            </button>
-          </li>
-          <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Products
-            </button>
-          </li>
-          <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Clients
-            </button>
-          </li>
-          <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Gandu
-            </button>
-          </li>
-          <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Gandu
-            </button>
-          </li>
-          <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Gandu
-            </button>
-          </li>
-          <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Gandu
-            </button>
-          </li>
-          <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Gandu
-            </button>
-          </li>
-          <li>
-            <button class="btn">
-              <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              ></svg>
-              Bho cd k
-            </button>
-          </li> */}
+          {renderProjects()}
         </ul>
         <hr />
       </div>

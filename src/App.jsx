@@ -1,27 +1,13 @@
 import { useState } from "react";
-import { Searchbar } from "./components/searchbar";
-import { Input } from "./components/input";
+import { ProjectSearchbar } from "./components/project_searchbar";
+import { TaskSearchbar } from "./components/task_searchbar";
+import { ProjectInput } from "./components/project_input";
 import { Sidebar } from "./components/sidebar";
-import { Card } from "./components/card";
 
 export function App() {
-  const [showForm, setShowform] = useState(false);
+  const [showProjectForm, setProjectform] = useState(false);
   const [projectList, setProjectList] = useState([]);
-  const [searchText, setSearchText] = useState("");
-  console.log(projectList);
-  console.log("searching: ", searchText);
-
-  const removeProject = (id) => {
-    setProjectList(projectList.filter((project) => project.id !== id));
-  };
-
-  const editProject = (updatedProject) => {
-    setProjectList(
-      projectList.map((project) =>
-        project.id !== updatedProject.id ? project : updatedProject
-      )
-    );
-  };
+  console.log("ProjectList: \n", projectList);
 
   const addProject = (project) => {
     setProjectList([
@@ -30,63 +16,25 @@ export function App() {
     ]);
   };
 
-  const renderProjects = () => {
-    if (projectList.length === 0)
-      return <h5 className="text-center p-2">Zero Project added</h5>;
-    const filteredArray = projectList.filter((project) => {
-      if (searchText === "") return true;
-      const regex = new RegExp(searchText, "i");
-      return regex.test(project.title);
-    });
-    if (filteredArray.length !== 0) {
-      filteredArray.sort((a, b) => a.title.localeCompare(b.title));
-      return filteredArray.map((project) => (
-        <Card
-          key={project.id}
-          {...project}
-          deleteProject={removeProject}
-          updateProject={editProject}
-        ></Card>
-      ));
-    } else {
-      return (
-        <>
-          <p className="text-center p-2">
-            Project not found!!!! <br /> click to add ?
-          </p>
-          <button
-            className={"btn btn-outline-success"}
-            onClick={() => {
-                setShowform(true);
-                setSearchText("");
-            }}
-          >
-            Add card
-          </button>
-        </>
-      );
-    }
-  };
-
   return (
     <>
       <div className="row">
-        <div className="col-lg-3">
-          <Sidebar setShowform={setShowform}></Sidebar>
+        <div className="col-lg-4">
+          <Sidebar
+            setProjectform={setProjectform}
+            ProjectSearchbar={ProjectSearchbar}
+            projectList={projectList}
+          ></Sidebar>
         </div>
         <div className="col-lg-3 me-5 mt-4">
-          <Searchbar
-            searchText={searchText}
-            setSearchText={setSearchText}
-          ></Searchbar>
-          {renderProjects()}
+          <TaskSearchbar></TaskSearchbar>
         </div>
         <div className="col-lg-4 ms-5">
-          <Input
-            showForm={showForm}
-            setShowform={setShowform}
+          <ProjectInput
+            showProjectForm={showProjectForm}
+            setProjectform={setProjectform}
             addProject={addProject}
-          ></Input>
+          ></ProjectInput>
         </div>
       </div>
     </>
