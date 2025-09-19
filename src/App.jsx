@@ -22,6 +22,7 @@ export function App() {
         <div className="col-lg-4">
           <Sidebar
             setProjectform={setProjectform}
+            setProjectList={setProjectList}
             ProjectSearchbar={ProjectSearchbar}
             projectList={projectList}
           ></Sidebar>

@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { ProjectCard } from "./projectCard";
 
-export function Sidebar({ setProjectform, ProjectSearchbar, projectList }) {
+export function Sidebar({ setProjectform, setProjectList, ProjectSearchbar, projectList }) {
   const [searchTextProject, setSearchTextProject] = useState("");
+
+  const removeProject = (id) => {
+    setProjectList(projectList.filter((project) => project.id !== id));
+  };
 
   const renderProjects = () => {
     if (projectList.length === 0)
@@ -16,7 +20,11 @@ export function Sidebar({ setProjectform, ProjectSearchbar, projectList }) {
       filteredArray.sort((a, b) => a.title.localeCompare(b.title));
       return filteredArray.map((project) => (
         <li>
-          <ProjectCard key={project.id} {...project}></ProjectCard>
+          <ProjectCard
+            key={project.id}
+            {...project}
+            deleteProject={removeProject}
+          ></ProjectCard>
         </li>
       ));
     } else {

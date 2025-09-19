@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-export function ProjectCard({ id, title, description, status }) {
+export function ProjectCard({ id, title, description, status, deleteProject }) {
   const [isEditing, setisEditing] = useState(false);
   const titleRef = useRef();
   const descriptionRef = useRef();
@@ -59,7 +59,7 @@ export function ProjectCard({ id, title, description, status }) {
             </button>
           )}
           {!isEditing && (
-            <button type="button" className="btn btn-outline-danger">
+            <button type="button" className="btn btn-outline-danger" onClick={() => deleteProject(id)}>
               Delete
             </button>
           )}
