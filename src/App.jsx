@@ -80,7 +80,10 @@ export function App() {
           ></Sidebar>
         </div>
         <div className="col-lg-3 me-5 mt-4">
-          <TaskSearchbar></TaskSearchbar>
+          <TaskSearchbar
+            searchTextTask={searchTextTask}
+            setSearchTextTask={setSearchTextTask}
+          ></TaskSearchbar>	
           {renderTasks()}
         </div>
         <div className="col-lg-4 ms-5">
