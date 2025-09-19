@@ -15,7 +15,8 @@ export function TaskInput({ showTaskForm, setTaskform, addTask }) {
     const status = statusRef.current.value;
     const created_at = created_atRef.current.value;
     const dueDate = dueDateRef.current.value;
-    if (!title || !description || !dueDate) {
+    console.log("taskRef values: ", title, description, dueDate);
+    if (!title || !description) {
       alert("try to Fill up all the input fields");
       return;
     }

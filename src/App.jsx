@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { ProjectSearchbar } from "./components/project_searchbar";
-import { TaskSearchbar } from "./components/task_searchbar";
-import { ProjectInput } from "./components/project_input";
-import { TaskInput } from "./components/task_input";
-import { TaskCard } from "./components/taskCard";
-import { Sidebar } from "./components/sidebar";
+import { ProjectSearchbar } from "./components/project/project_searchbar";
+import { TaskSearchbar } from "./components//task/task_searchbar";
+import { ProjectInput } from "./components/project/project_input";
+import { TaskInput } from "./components/task/task_input";
+import { TaskCard } from "./components/task/taskCard";
+import { Sidebar } from "./components/project/sidebar";
 
 export function App() {
   const [showProjectForm, setProjectform] = useState(false);
@@ -21,6 +21,12 @@ export function App() {
     ]);
   };
 
+  const removeTask = (id) => {
+    // const clickedProject = projectList.filter((project) => project.id === selectedProject);
+    // clickedProject[0].task.filter((task) => task.id !== id);
+    // console.log("ProjectList after deletion of a Task: \n", projectList);
+  };
+
   const addTask = (project) => {
     const clickedProject = projectList.filter((project) => project.id === selectedProject);
     clickedProject[0].tasks.push({...project, id: clickedProject[0].tasks.length + 1});
@@ -32,7 +38,8 @@ export function App() {
      if (clickedProject.length === 0) // first check kro ki project pe click hua ki nhi ? and does it exist ?
       return <h5 className="text-center p-2">click on any project to see their tasks</h5>;
     if (clickedProject[0].tasks.length === 0)
-      return <h5 className="text-center p-2">Zero task added to this project</h5>;
+      return <h5 className="text-center p-2">Zero task added to {clickedProject[0].title} project</h5>;
+
     const filteredArray = clickedProject[0].tasks.filter((task) => {
       if (searchTextTask === "") return true;
       const regex = new RegExp(searchTextTask, "i");
@@ -44,6 +51,7 @@ export function App() {
         <TaskCard
           key={task.id}
           {...task}
+          deleteTask={removeTask}
         ></TaskCard>
       ));
     } else {
