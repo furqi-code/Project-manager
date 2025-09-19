@@ -101,19 +101,19 @@ export function TaskCard({
                 type="button"
                 className="canvaBtn btn-save"
                 onClick={() => {
-                  // const title = titleRef.current.value;
-                  // const description = descriptionRef.current.value;
-                  // updateTask({
-                  //   id,
-                  //   title,
-                  //   description,
-                  //   status: "just now",
-                  //   created_at,
-                  //   dueDate,
-                  //   updated_at: new Date().toISOString().split("T")[0],
-                  // });
-                  // setisEditing(false);
-                  // setisUpdated(true);
+                  const title = titleRef.current.value;
+                  const description = descriptionRef.current.value;
+                  updateTask({
+                    id,
+                    title,
+                    description,
+                    status: "just now",
+                    created_at,
+                    dueDate,
+                    updated_at: new Date().toISOString().split("T")[0],
+                  });
+                  setisEditing(false);
+                  setisUpdated(true);
                 }}
               >
                 💾 save

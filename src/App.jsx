@@ -22,23 +22,49 @@ export function App() {
   };
 
   const removeTask = (id) => {
-    // const clickedProject = projectList.filter((project) => project.id === selectedProject);
-    // clickedProject[0].task.filter((task) => task.id !== id);
-    // console.log("ProjectList after deletion of a Task: \n", projectList);
+    setProjectList(
+      projectList.map((project) => {
+        if (project.id !== selectedProject) {
+          return project;
+        }
+        return {
+          ...project,
+          tasks: project.tasks.filter((task) => task.id !== id),
+        };
+      })
+    );
   };
 
-  const addTask = (project) => {
-    const clickedProject = projectList.filter((project) => project.id === selectedProject);
-    clickedProject[0].tasks.push({...project, id: clickedProject[0].tasks.length + 1});
+  // The projectList array is getting updated, but the task of that particular project
+  //  only shows up because the showTaskForm state is being changed
+  const addTask = (task) => {
+    const clickedProject = projectList.filter(
+      (project) => project.id === selectedProject
+    );
+    clickedProject[0].tasks.push({
+      ...task,
+      id: clickedProject[0].tasks.length + 1,
+    });
     console.log("adding task of selectedProject: \n", clickedProject);
   };
 
   const renderTasks = () => {
-    const clickedProject = projectList.filter((project) => project.id === selectedProject);
-     if (clickedProject.length === 0) // first check kro ki project pe click hua ki nhi ? and does it exist ?
-      return <h5 className="text-center p-2">click on any project to see their tasks</h5>;
+    const clickedProject = projectList.filter(
+      (project) => project.id === selectedProject
+    );
+    if (clickedProject.length === 0)
+      // first check kro ki project pe click hua ki nhi ? and does it exist ?
+      return (
+        <h5 className="text-center p-2">
+          click on any project to see their tasks
+        </h5>
+      );
     if (clickedProject[0].tasks.length === 0)
-      return <h5 className="text-center p-2">Zero task added to {clickedProject[0].title} project</h5>;
+      return (
+        <h5 className="text-center p-2">
+          Zero task added to {clickedProject[0].title} project
+        </h5>
+      );
 
     const filteredArray = clickedProject[0].tasks.filter((task) => {
       if (searchTextTask === "") return true;
@@ -52,6 +78,7 @@ export function App() {
           key={task.id}
           {...task}
           deleteTask={removeTask}
+          updateTask={editTask}
         ></TaskCard>
       ));
     } else {
@@ -91,7 +118,7 @@ export function App() {
           <TaskSearchbar
             searchTextTask={searchTextTask}
             setSearchTextTask={setSearchTextTask}
-          ></TaskSearchbar>	
+          ></TaskSearchbar>
           {renderTasks()}
         </div>
         <div className="col-lg-4 ms-5">

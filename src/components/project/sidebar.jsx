@@ -38,6 +38,7 @@ export function Sidebar({
           onClick={() => {
             setSelectedProject(project.id);
             setTaskform(true);
+            setProjectform(false);
           }}
         >
           <ProjectCard
@@ -93,7 +94,13 @@ export function Sidebar({
         ></ProjectSearchbar>
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <button class="btn text-white" onClick={() => setProjectform(true)}>
+            <button
+              class="btn text-white"
+              onClick={() => {
+                setProjectform(true);
+                setTaskform(false);
+              }}
+            >
               <svg
                 class="bi pe-none me-2"
                 width="16"
